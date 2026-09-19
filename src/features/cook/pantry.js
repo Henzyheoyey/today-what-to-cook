@@ -15,6 +15,10 @@ export const QUICK = [
   { ko: "고추장", en: "gochujang" },
 ];
 
+export function getQuickPicks(state) {
+  return state.quickPicks ?? QUICK;
+}
+
 export function quickName(item) {
   return getLanguage() === "en" ? item.en : item.ko;
 }

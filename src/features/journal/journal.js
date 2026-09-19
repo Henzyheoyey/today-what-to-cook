@@ -6,6 +6,7 @@ import {
   todayKey,
 } from "./calendar.js";
 import { dishCard, dishesOn, recentDishes } from "./journal-list.js";
+import { mountPhotoField } from "./photo.js";
 import { t } from "../../shared/language.js";
 
 export function initJournal(state, persist) {
@@ -24,6 +25,7 @@ export function initJournal(state, persist) {
   const saveBtn = document.querySelector("[data-save-dish]");
   const cancelBtn = document.querySelector("[data-cancel-edit]");
   const recentRoot = document.querySelector("[data-recent]");
+  const photoField = mountPhotoField();
 
   function paint() {
     monthEl.textContent = monthLabel(viewYear, viewMonth);
@@ -48,6 +50,7 @@ export function initJournal(state, persist) {
   function resetForm() {
     editingId = null;
     form.reset();
+    photoField.set("");
     saveBtn.textContent = t("journal.save");
     cancelBtn.hidden = true;
   }
@@ -68,6 +71,7 @@ export function initJournal(state, persist) {
     form.title.value = dish.title;
     form.recipe.value = dish.recipe;
     form.note.value = dish.note;
+    photoField.set(dish.photo);
     saveBtn.textContent = t("journal.saveEdit");
     cancelBtn.hidden = false;
     form.title.focus();
@@ -115,6 +119,7 @@ export function initJournal(state, persist) {
       title,
       recipe: form.recipe.value.trim(),
       note: form.note.value.trim(),
+      photo: photoField.get(),
     };
     const current = dishesOn(state, selectedDate);
     state.journal[selectedDate] = editingId

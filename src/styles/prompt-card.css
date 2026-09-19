@@ -1,0 +1,31 @@
+.prompt-card {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #f4f0ea;
+  box-shadow: var(--shadow-md);
+}
+
+.prompt-card h2 {
+  color: #fff;
+}
+
+.prompt-card .hint {
+  color: #b5aca0;
+}
+
+.prompt-body {
+  margin: var(--space-3) 0 0;
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  white-space: pre-wrap;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  user-select: text;
+}
+
+.prompt-empty {
+  margin-top: var(--space-3);
+  color: #b5aca0;
+  font-size: 0.86rem;
+}

@@ -13,11 +13,10 @@ body {
   min-height: 100dvh;
   font-family: var(--sans);
   color: var(--ink);
-  background:
-    radial-gradient(circle at 12% -8%, #f8e6d8 0%, transparent 42%),
-    radial-gradient(circle at 100% 0%, #e4ecdf 0%, transparent 36%),
-    var(--paper);
-  line-height: 1.5;
+  background: var(--paper);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 button,
@@ -30,6 +29,7 @@ select {
 
 button {
   cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 h1,
@@ -37,6 +37,12 @@ h2,
 h3,
 p {
   margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.025em;
 }
 
 :focus-visible {

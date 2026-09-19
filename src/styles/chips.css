@@ -1,0 +1,80 @@
+.chip-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+  min-height: 3rem;
+  padding: 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.chip-box:focus-within {
+  border-color: var(--accent);
+  background: var(--card);
+}
+
+.chip-box input {
+  flex: 1 1 8rem;
+  min-width: 7rem;
+  border: 0;
+  padding: 0.4rem 0.45rem;
+  background: transparent;
+  font-size: 0.92rem;
+}
+
+.chip-box input::placeholder {
+  color: var(--muted);
+}
+
+.chip-box input:focus {
+  outline: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.3rem 0.3rem 0.3rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--sage-soft);
+  color: var(--sage);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.chip button {
+  display: grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 0.95rem;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+.chip button:hover {
+  background: rgba(255, 255, 255, 0.8);
+  opacity: 1;
+}
+
+.chip button[data-remove]::before {
+  content: "×";
+}
+
+.chip-shop {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.chip-bought::before {
+  content: "✓";
+  font-size: 0.78rem;
+}

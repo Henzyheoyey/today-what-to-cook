@@ -1,0 +1,6 @@
+.shop-count {
+  margin-top: var(--space-2);
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 600;
+}

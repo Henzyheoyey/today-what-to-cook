@@ -1,0 +1,132 @@
+body {
+  transition: background 0.25s ease;
+}
+
+body[data-deck="analyze"] {
+  --paper: #faf3f2;
+  --paper-2: #f2e2e1;
+  --card: #fffdfd;
+  --ink: #241f20;
+  --ink-2: #534749;
+  --muted: #8e7d7f;
+  --line: #ecdedd;
+  --line-strong: #dcc9c8;
+  --accent: #c04a55;
+  --accent-hover: #a63b46;
+  --accent-soft: #fbe5e7;
+  --sage: #6b5560;
+  --sage-soft: #efe3e6;
+}
+
+.shell {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  padding: 0 1rem;
+}
+
+.deck {
+  position: sticky;
+  top: 1.6rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin-top: 1.6rem;
+}
+
+.deck-tab {
+  writing-mode: vertical-rl;
+  width: 2.7rem;
+  padding: 1.2rem 0.45rem;
+  border: 1px solid var(--line-strong);
+  border-right: 0;
+  border-radius: 0.85rem 0 0 0.85rem;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.45), transparent 55%),
+    var(--paper-2);
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateX(0.55rem);
+}
+
+.deck-tab + .deck-tab {
+  margin-top: 0.35rem;
+}
+
+.deck-tab:hover {
+  color: var(--ink-2);
+  transform: translateX(0.2rem);
+}
+
+.deck-tab[aria-selected="true"] {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.7), transparent 50%),
+    var(--card);
+  color: var(--ink);
+  box-shadow: -4px 6px 16px rgba(35, 32, 28, 0.06);
+  transform: translateX(1px);
+}
+
+.deck-body {
+  width: min(100%, 42rem);
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  padding: 0 1.35rem 0.5rem;
+}
+
+body[data-deck="cook"] .deck-body.is-wide {
+  width: min(100%, 60rem);
+}
+
+@media (max-width: 860px) {
+  .shell {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 0.75rem;
+  }
+
+  .deck {
+    position: static;
+    flex-direction: row;
+    margin: 1rem 0 0;
+  }
+
+  .deck-tab {
+    writing-mode: horizontal-tb;
+    width: auto;
+    flex: 1;
+    padding: 0.7rem 0.5rem;
+    border: 1px solid var(--line-strong);
+    border-bottom: 0;
+    border-radius: 0.85rem 0.85rem 0 0;
+    transform: none;
+    font-size: 0.86rem;
+    letter-spacing: 0.04em;
+  }
+
+  .deck-tab + .deck-tab {
+    margin-top: 0;
+    margin-left: 0.25rem;
+  }
+
+  .deck-tab:hover,
+  .deck-tab[aria-selected="true"] {
+    transform: none;
+  }
+
+  .deck-body,
+  body[data-deck="cook"] .deck-body.is-wide {
+    width: 100%;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    padding: 0 0.9rem 0.5rem;
+  }
+}

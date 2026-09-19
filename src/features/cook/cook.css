@@ -1,159 +1,28 @@
-.chip-box {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.75rem;
-  min-height: 3rem;
-  padding: 0.5rem;
-  border: 1px solid var(--line);
-  border-radius: 0.95rem;
-  background: #fff;
-}
-
-.chip-box input {
-  flex: 1 1 8rem;
-  min-width: 7rem;
-  border: 0;
-  padding: 0.4rem 0.45rem;
-  background: transparent;
-}
-
-.chip-box input:focus {
-  outline: none;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.2rem;
-  padding: 0.28rem 0.28rem 0.28rem 0.7rem;
-  border-radius: 999px;
-  background: var(--sage-soft);
-  color: var(--sage);
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.chip button {
-  width: 1.35rem;
-  height: 1.35rem;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--sage);
-  font-size: 1rem;
-  line-height: 1;
-}
-
-.chip button[data-remove]::before {
-  content: "×";
-}
-
-.chip button:hover {
-  background: #fff;
-}
-
-.quick-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.75rem;
-}
-
-.quick-chip,
-.pill {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.4rem 0.75rem;
-  background: #fff;
-  color: var(--ink);
-  font-size: 0.86rem;
-}
-
-.quick-chip[aria-pressed="true"],
-.pill[aria-pressed="true"] {
-  border-color: transparent;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-weight: 650;
-}
-
 .option-block + .option-block {
-  margin-top: 0.95rem;
+  margin-top: var(--space-3);
 }
 
 .option-label {
-  margin-bottom: 0.4rem;
+  margin-bottom: var(--space-1);
   color: var(--muted);
-  font-size: 0.84rem;
-  font-weight: 650;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
-.pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.prompt-card {
-  background: #2b231c;
-  color: #f4eee6;
-  border-color: #2b231c;
-}
-
-.prompt-card h2,
-.prompt-card .hint,
 .prompt-card .ghost-btn {
-  color: #e8dccf;
+  color: #b5aca0;
 }
 
-.prompt-body {
-  margin: 0.85rem 0 0;
-  white-space: pre-wrap;
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  line-height: 1.55;
-  user-select: text;
-}
-
-.prompt-empty {
-  margin-top: 0.85rem;
-  color: #cbbba8;
-}
-
-.chip-shop {
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-
-.chip-bought {
-  width: 1.35rem;
-  height: 1.35rem;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--accent);
-  font-size: 0.85rem;
-  line-height: 1;
-}
-
-.chip-bought::before {
-  content: "✓";
-}
-
-.chip-bought:hover {
-  background: #fff;
-}
-
-.chip-shop button[data-remove] {
-  color: var(--accent);
+.prompt-card .ghost-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
 }
 
 .video-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.85rem;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
 }
 
 .video-row:empty {
@@ -162,28 +31,22 @@
 
 .video-btn {
   border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.5rem 0.9rem;
-  background: #fff;
-  color: var(--ink);
-  font-size: 0.88rem;
-  font-weight: 650;
+  border-radius: var(--radius-pill);
+  padding: 0.45rem 0.9rem;
+  background: var(--card);
+  color: var(--ink-2);
+  font-size: 0.85rem;
+  font-weight: 600;
   text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
 .video-btn:hover {
-  border-color: transparent;
+  border-color: var(--accent);
   background: var(--accent-soft);
   color: var(--accent);
 }
 
 .video-keyword {
-  margin-top: 0.6rem;
-}
-
-.shop-count {
-  margin-top: 0.7rem;
-  color: var(--muted);
-  font-size: 0.86rem;
-  font-weight: 650;
+  margin-top: var(--space-2);
 }

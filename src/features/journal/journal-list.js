@@ -22,10 +22,17 @@ export function dishCard(dish, { onEdit, onDelete }) {
         <button type="button" class="ghost-btn" data-delete></button>
       </div>
     </div>
+    <img class="cooked-photo" alt="" />
     <p class="cooked-note"></p>
     <pre class="cooked-recipe"></pre>
   `;
   article.querySelector("h3").textContent = dish.title;
+  const photo = article.querySelector(".cooked-photo");
+  photo.hidden = !dish.photo;
+  if (dish.photo) {
+    photo.src = dish.photo;
+    photo.alt = t("journal.photoAlt", { title: dish.title });
+  }
   article.querySelector("[data-edit]").textContent = t("journal.edit");
   article.querySelector("[data-delete]").textContent = t("journal.delete");
   const note = article.querySelector(".cooked-note");

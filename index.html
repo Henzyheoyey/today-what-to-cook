@@ -12,18 +12,58 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700;800&display=swap"
+    />
     <link rel="stylesheet" href="src/styles/tokens.css" />
     <link rel="stylesheet" href="src/styles/base.css" />
     <link rel="stylesheet" href="src/styles/layout.css" />
+    <link rel="stylesheet" href="src/styles/components.css" />
+    <link rel="stylesheet" href="src/styles/prompt-card.css" />
+    <link rel="stylesheet" href="src/styles/deck.css" />
+    <link rel="stylesheet" href="src/styles/chips.css" />
     <link rel="stylesheet" href="src/features/cook/cook.css" />
+    <link rel="stylesheet" href="src/features/cook/quick-picks.css" />
+    <link rel="stylesheet" href="src/features/shop/shop.css" />
+    <link rel="stylesheet" href="src/features/journal/calendar.css" />
     <link rel="stylesheet" href="src/features/journal/journal.css" />
+    <link rel="stylesheet" href="src/features/journal/photo.css" />
+    <link rel="stylesheet" href="src/features/analyze/analyze.css" />
   </head>
-  <body>
-    <div class="page" data-page>
+  <body data-deck="cook">
+    <div class="shell">
+      <nav class="deck" role="tablist" aria-label="도구 고르기" data-i18n-aria="deck.aria">
+        <button class="deck-tab" type="button" role="tab" data-deck="cook" aria-selected="true" data-i18n="deck.cook">
+          요리 프롬프트
+        </button>
+        <button class="deck-tab" type="button" role="tab" data-deck="analyze" aria-selected="false" data-i18n="deck.analyze">
+          영상 분석
+        </button>
+      </nav>
+
+      <main class="deck-body" data-page>
+    <section class="page" data-deck-panel="cook">
       <header class="site-header">
         <div class="header-top">
           <div>
-            <h1 data-i18n="app.title">오늘 뭐 해먹지</h1>
+            <div class="brand">
+              <svg class="brand-mark" viewBox="0 0 16 44" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <ellipse cx="8" cy="11" rx="4.8" ry="8.4" />
+                  <path d="M8 19.4 V41" />
+                </g>
+              </svg>
+              <h1 data-i18n="app.title">오늘 뭐 해먹지</h1>
+              <svg class="brand-mark" viewBox="0 0 16 44" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M3.6 3 L6.2 41" />
+                  <path d="M12.4 3 L9.8 41" />
+                </g>
+              </svg>
+            </div>
             <p class="lede" data-i18n="app.lede">재료를 넣으면 AI에 바로 붙여넣을 프롬프트가 생겨요.</p>
           </div>
           <div class="lang-toggle" role="group" aria-label="언어" data-i18n-aria="lang.aria">
@@ -59,7 +99,24 @@
               data-i18n-aria="cook.ingredientAria"
             />
           </div>
+          <div class="quick-head">
+            <p class="option-label" data-i18n="cook.quickTitle">빠른 선택</p>
+            <button class="ghost-btn" type="button" data-quick-edit>편집</button>
+          </div>
           <div class="quick-row" data-quick></div>
+          <div class="quick-add" data-quick-add hidden>
+            <input
+              data-quick-input
+              type="text"
+              enterkeyhint="done"
+              autocomplete="off"
+              placeholder="빠른 선택에 추가할 재료"
+              aria-label="빠른 선택에 재료 추가"
+              data-i18n-placeholder="cook.quickAddPlaceholder"
+              data-i18n-aria="cook.quickAddAria"
+            />
+            <button class="ghost-btn" type="button" data-quick-reset data-i18n="cook.quickReset">기본으로</button>
+          </div>
         </article>
 
         <article class="card">
@@ -231,6 +288,20 @@
                 data-i18n-placeholder="journal.notePlaceholder"
                 data-i18n-aria="journal.noteAria"
               />
+              <label class="photo-picker">
+                <input type="file" accept="image/*" data-photo-input hidden />
+                <span data-i18n="journal.addPhoto">사진 넣기</span>
+              </label>
+              <figure class="photo-preview" data-photo-preview hidden>
+                <img data-photo-image alt="" />
+                <button
+                  class="photo-remove"
+                  type="button"
+                  data-photo-remove
+                  aria-label="사진 지우기"
+                  data-i18n-aria="journal.removePhoto"
+                ></button>
+              </figure>
               <div class="form-actions">
                 <button class="accent-btn" type="submit" data-save-dish data-i18n="journal.save">이 날 기록 저장</button>
                 <button class="ghost-btn" type="button" data-cancel-edit data-i18n="journal.cancel" hidden>수정 취소</button>
@@ -241,6 +312,104 @@
       </section>
 
       <p class="fine-print" data-i18n="footer.privacy">재료와 기록은 이 브라우저에만 저장돼요. 서버로 보내지 않아요.</p>
+    </section>
+
+    <section class="page" data-deck-panel="analyze" hidden>
+      <header class="site-header">
+        <div class="header-top">
+          <div>
+            <div class="brand">
+              <svg class="brand-mark" viewBox="0 0 16 44" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 8 L14 22 L4 36 Z" />
+                </g>
+              </svg>
+              <h1 data-i18n="analyze.title">다시쓰기</h1>
+              <svg class="brand-mark" viewBox="0 0 16 44" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M5 8 V36" />
+                  <path d="M11 8 V36" />
+                </g>
+              </svg>
+            </div>
+            <p class="lede" data-i18n="analyze.lede">영상 링크를 넣으면 AI에 붙여넣을 분석 프롬프트가 생겨요.</p>
+          </div>
+          <div class="lang-toggle" role="group" aria-label="언어" data-i18n-aria="lang.aria">
+            <button type="button" data-lang-btn="ko" aria-pressed="true">KO</button>
+            <button type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+          </div>
+        </div>
+      </header>
+
+      <article class="card">
+        <h2 data-i18n="analyze.linkTitle">영상 링크</h2>
+        <p class="hint" data-i18n="analyze.linkHint">유튜브는 대본까지 같이 가져와요. 인스타·틱톡은 링크만 넣어도 돼요.</p>
+        <form data-analyze-form>
+          <input
+            class="field"
+            data-url
+            type="url"
+            inputmode="url"
+            autocomplete="url"
+            placeholder="https://www.youtube.com/shorts/"
+            aria-label="영상 링크"
+            data-i18n-placeholder="analyze.linkPlaceholder"
+            data-i18n-aria="analyze.linkAria"
+          />
+          <div class="pills" data-platforms>
+            <button class="pill" type="button" data-platform="youtube" aria-pressed="true">YouTube Shorts</button>
+            <button class="pill" type="button" data-platform="instagram" aria-pressed="false">Instagram</button>
+            <button class="pill" type="button" data-platform="tiktok" aria-pressed="false">TikTok</button>
+            <button class="pill" type="button" data-platform="facebook" aria-pressed="false">Facebook</button>
+          </div>
+          <button class="ghost-btn" type="button" data-script-toggle data-i18n="analyze.pasteToggle">대본 직접 붙여넣기</button>
+          <div class="script-box" data-script-box hidden>
+            <textarea
+              class="field"
+              data-script
+              rows="5"
+              placeholder="대본이 있으면 여기에 붙여넣으세요 (선택)"
+              aria-label="대본"
+              data-i18n-placeholder="analyze.scriptPlaceholder"
+              data-i18n-aria="analyze.scriptAria"
+            ></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="accent-btn" type="submit" data-i18n="analyze.submit">프롬프트 만들기</button>
+            <button class="ghost-btn" type="button" data-demo data-i18n="analyze.demo">예시로 먼저 보기</button>
+          </div>
+        </form>
+        <p class="status" data-status hidden></p>
+        <div class="progress" data-progress hidden>
+          <div class="progress-row">
+            <span data-progress-label></span>
+            <span data-progress-pct>0%</span>
+          </div>
+          <div class="progress-track"><i data-progress-bar></i></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2 data-i18n="analyze.itemsTitle">이런 걸 분석해요</h2>
+        <p class="hint" data-i18n="analyze.itemsHint">프롬프트에 아래 다섯 가지가 순서대로 들어가요.</p>
+        <div class="item-grid" data-items></div>
+      </article>
+
+      <article class="card prompt-card">
+        <div class="card-head">
+          <div>
+            <h2 data-i18n="analyze.promptTitle">분석 프롬프트</h2>
+            <p class="hint" data-i18n="analyze.promptHint">복사해서 ChatGPT, Claude, Gemini에 붙여넣으세요.</p>
+          </div>
+          <button class="accent-btn" type="button" data-analyze-copy data-i18n="analyze.copy" disabled>복사하기</button>
+        </div>
+        <p class="prompt-empty" data-analyze-empty data-i18n="analyze.promptEmpty">영상 링크를 넣으면 여기에 프롬프트가 생겨요.</p>
+        <pre class="prompt-body" data-analyze-prompt hidden></pre>
+      </article>
+
+      <p class="fine-print" data-i18n="analyze.privacy">유튜브 대본만 이 컴퓨터에서 가져와요. 영상 파일은 저장하지 않아요.</p>
+    </section>
+      </main>
     </div>
     <script type="module" src="src/app/main.js"></script>
   </body>

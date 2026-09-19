@@ -1,0 +1,135 @@
+.card {
+  margin-top: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+
+.card h2 {
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.hint {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.ghost-btn,
+.accent-btn {
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ghost-btn {
+  background: transparent;
+  color: var(--muted);
+}
+
+.ghost-btn:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.accent-btn {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.accent-btn:hover {
+  background: var(--accent-hover);
+}
+
+.accent-btn:disabled {
+  cursor: not-allowed;
+  background: var(--paper-2);
+  color: var(--muted);
+  box-shadow: none;
+}
+
+.field {
+  width: 100%;
+  margin-top: var(--space-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 0.7rem 0.85rem;
+  background: var(--paper);
+  font-size: 0.92rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.field::placeholder {
+  color: var(--muted);
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--card);
+}
+
+textarea.field {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.pill {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 0.38rem 0.8rem;
+  background: var(--card);
+  color: var(--ink-2);
+  font-size: 0.85rem;
+}
+
+.pill:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.pill[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: var(--space-3);
+  }
+
+  .card-head {
+    gap: var(--space-1);
+  }
+}

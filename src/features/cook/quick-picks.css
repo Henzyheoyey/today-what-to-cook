@@ -1,0 +1,97 @@
+.quick-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.quick-head .option-label {
+  margin-bottom: 0;
+}
+
+.quick-head .ghost-btn {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.quick-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.quick-chip {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 0.38rem 0.8rem;
+  background: var(--card);
+  color: var(--ink-2);
+  font-size: 0.85rem;
+}
+
+.quick-chip:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.quick-chip[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.quick-chip.is-editing {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding-right: 0.3rem;
+  border-style: dashed;
+  color: var(--muted);
+}
+
+.quick-remove {
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.quick-remove::before {
+  content: "×";
+}
+
+.quick-remove:hover {
+  background: var(--accent-soft);
+}
+
+.quick-add {
+  display: flex;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.quick-add input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-pill);
+  padding: 0.38rem 0.85rem;
+  background: var(--paper);
+  font-size: 0.85rem;
+}
+
+.quick-add input:focus {
+  outline: none;
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--card);
+}

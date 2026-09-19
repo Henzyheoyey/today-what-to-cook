@@ -1,6 +1,7 @@
 import { mountChips } from "./chips.js";
 import { buildPrompt, canBuildPrompt } from "./prompt.js";
-import { hasQuickItem, QUICK, quickName } from "./pantry.js";
+import { quickName } from "./pantry.js";
+import { mountQuickPicks } from "./quick-picks.js";
 import { renderVideoLinks } from "./video-links.js";
 import { t } from "../../shared/language.js";
 
@@ -30,7 +31,6 @@ export function initCook(state, persist, { onPantryChange } = {}) {
   const promptEl = document.querySelector("[data-prompt]");
   const emptyEl = document.querySelector("[data-prompt-empty]");
   const copyBtn = document.querySelector("[data-copy]");
-  const quickRoot = document.querySelector("[data-quick]");
 
   const ingredientChips = mountChips({
     box: document.querySelector("[data-ingredient-box]"),
@@ -60,19 +60,11 @@ export function initCook(state, persist, { onPantryChange } = {}) {
     if (ready) promptEl.textContent = buildPrompt(state);
   }
 
-  function renderQuick() {
-    quickRoot.innerHTML = "";
-    QUICK.forEach((item) => {
-      const on = hasQuickItem(state.ingredients, item);
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "quick-chip";
-      button.textContent = quickName(item);
-      button.setAttribute("aria-pressed", String(on));
-      button.addEventListener("click", () => toggleQuick(item, on));
-      quickRoot.appendChild(button);
-    });
-  }
+  const quickPicks = mountQuickPicks({
+    state,
+    onToggle: (item, on) => toggleQuick(item, on),
+    onListChange: () => afterChange(),
+  });
 
   function toggleQuick(item, on) {
     if (on) {
@@ -98,7 +90,7 @@ export function initCook(state, persist, { onPantryChange } = {}) {
     ingredientChips.render();
     avoidChips.render();
     renderPrompt();
-    renderQuick();
+    quickPicks.render();
     renderVideoLinks(state);
   }
 
