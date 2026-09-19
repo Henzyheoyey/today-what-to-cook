@@ -1,0 +1,45 @@
+---
+description: Write simple, concise, easy-to-read code
+alwaysApply: true
+---
+
+# Simple, Readable Code
+
+Prefer the shortest version that a beginner can still understand. If a line needs a comment to make sense, rewrite the code instead.
+
+## Do
+
+- Use clear names: `userName`, `isOpen`, `fetchPosts` — not `x`, `data2`, `doStuff`
+- One idea per function. If it does two jobs, split it
+- Keep functions short (aim under 30 lines)
+- Use early returns to avoid nested `if` / `else`
+- Delete unused variables, comments, and dead code
+- Repeat a little rather than add a clever abstraction for a one-off
+
+## Don't
+
+- Don't nest more than 2 levels deep
+- Don't write comments that restate the code (`// increment i`)
+- Don't add types, wrappers, or helpers "just in case"
+- Don't mix UI, data fetching, and business logic in one function
+
+```javascript
+// ❌ BAD — nested, vague names, extra else
+function handle(d) {
+  if (d) {
+    if (d.ok) {
+      return d.list;
+    } else {
+      return [];
+    }
+  } else {
+    return [];
+  }
+}
+
+// ✅ GOOD — flat, obvious names
+function getPosts(response) {
+  if (!response?.ok) return [];
+  return response.list;
+}
+```

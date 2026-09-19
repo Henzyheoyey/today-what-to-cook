@@ -1,0 +1,41 @@
+---
+description: Keep files small, named clearly, and grouped by feature
+alwaysApply: true
+---
+
+# File Organization
+
+One file, one job. A reader should guess a file's purpose from its path and name.
+
+## Layout
+
+Group by feature, not by type:
+
+```
+src/
+  app/              # pages / entry points
+  features/
+    auth/           # login, session — all in one folder
+    posts/          # list, detail, create
+  shared/           # reused UI, hooks, utils (only if used twice+)
+  styles/
+```
+
+## Naming
+
+- Files: `kebab-case` (`user-card.jsx`, `fetch-posts.js`)
+- Components: match the export (`UserCard` lives in `user-card.jsx`)
+- Folders: short and specific (`auth`, `posts`) — not `misc`, `helpers`, `stuff`
+
+## Size and splits
+
+- Keep files under ~150 lines. Split when a file covers two topics
+- Colocate: a component, its styles, and its tiny helpers stay in the same folder
+- Put a file in `shared/` only after a second feature needs it
+- Don't create empty folders or "utils.js" dumping grounds
+
+## Don't
+
+- Don't mix unrelated features in one file
+- Don't nest folders more than 3 levels under `src/`
+- Don't duplicate the same helper in three places — extract to `shared/` then

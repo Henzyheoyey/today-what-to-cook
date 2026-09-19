@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="냉장고 재료로 AI 요리 프롬프트를 만들고, 없는 재료는 장보기로 모아 두세요."
+    />
+    <title>오늘 뭐 해먹지</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <link rel="stylesheet" href="src/styles/tokens.css" />
+    <link rel="stylesheet" href="src/styles/base.css" />
+    <link rel="stylesheet" href="src/styles/layout.css" />
+    <link rel="stylesheet" href="src/features/cook/cook.css" />
+    <link rel="stylesheet" href="src/features/journal/journal.css" />
+  </head>
+  <body>
+    <div class="page" data-page>
+      <header class="site-header">
+        <div class="header-top">
+          <div>
+            <h1 data-i18n="app.title">오늘 뭐 해먹지</h1>
+            <p class="lede" data-i18n="app.lede">재료를 넣으면 AI에 바로 붙여넣을 프롬프트가 생겨요.</p>
+          </div>
+          <div class="lang-toggle" role="group" aria-label="언어" data-i18n-aria="lang.aria">
+            <button type="button" data-lang-btn="ko" aria-pressed="true">KO</button>
+            <button type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+          </div>
+        </div>
+        <div class="tabs" role="tablist" aria-label="페이지" data-i18n-aria="tabs.aria">
+          <button type="button" role="tab" data-tab="cook" aria-selected="true" data-i18n="tabs.cook">요리 찾기</button>
+          <button type="button" role="tab" data-tab="shop" aria-selected="false" data-i18n="tabs.shop">장보기</button>
+          <button type="button" role="tab" data-tab="journal" aria-selected="false" data-i18n="tabs.journal">해먹은 요리</button>
+        </div>
+      </header>
+
+      <section data-panel="cook" role="tabpanel">
+        <article class="card">
+          <div class="card-head">
+            <div>
+              <h2 data-i18n="cook.haveTitle">지금 있는 재료</h2>
+              <p class="hint" data-i18n="cook.haveHint">이름 쓰고 엔터. 쉼표로 여러 개도 넣을 수 있어요.</p>
+            </div>
+            <button class="ghost-btn" type="button" data-clear-ingredients data-i18n="cook.clearAll">모두 지우기</button>
+          </div>
+          <div class="chip-box" data-ingredient-box>
+            <input
+              data-ingredient-input
+              type="text"
+              enterkeyhint="done"
+              autocomplete="off"
+              placeholder="예: 달걀"
+              aria-label="재료 추가"
+              data-i18n-placeholder="cook.ingredientPlaceholder"
+              data-i18n-aria="cook.ingredientAria"
+            />
+          </div>
+          <div class="quick-row" data-quick></div>
+        </article>
+
+        <article class="card">
+          <h2 data-i18n="cook.dishTitle">만들고 싶은 요리 (선택)</h2>
+          <p class="hint" data-i18n="cook.dishHint">비워 두면 재료로 요리를 찾고, 채우면 그 요리 레시피를 찾아요.</p>
+          <input
+            class="field"
+            data-dish-name
+            type="text"
+            autocomplete="off"
+            placeholder="예: 김치볶음밥"
+            aria-label="만들고 싶은 요리"
+            data-i18n-placeholder="cook.dishPlaceholder"
+            data-i18n-aria="cook.dishAria"
+          />
+        </article>
+
+        <article class="card">
+          <h2 data-i18n="cook.avoidTitle">빼고 싶은 재료</h2>
+          <p class="hint" data-i18n="cook.avoidHint">알러지거나 먹기 싫은 건 여기에 넣어요.</p>
+          <div class="chip-box" data-avoid-box>
+            <input
+              data-avoid-input
+              type="text"
+              enterkeyhint="done"
+              autocomplete="off"
+              placeholder="예: 새우"
+              aria-label="빼고 싶은 재료 추가"
+              data-i18n-placeholder="cook.avoidPlaceholder"
+              data-i18n-aria="cook.avoidAria"
+            />
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="option-block">
+            <p class="option-label" data-i18n="cook.servings">몇 인분</p>
+            <div class="pills" data-servings>
+              <button class="pill" type="button" data-value="1">1</button>
+              <button class="pill" type="button" data-value="2" aria-pressed="true">2</button>
+              <button class="pill" type="button" data-value="3">3</button>
+              <button class="pill" type="button" data-value="4">4</button>
+            </div>
+          </div>
+          <div class="option-block">
+            <p class="option-label" data-i18n="cook.minutes">시간은</p>
+            <div class="pills" data-minutes>
+              <button class="pill" type="button" data-value="15" data-i18n="cook.min15">15분</button>
+              <button class="pill" type="button" data-value="30" aria-pressed="true" data-i18n="cook.min30">30분</button>
+              <button class="pill" type="button" data-value="60" data-i18n="cook.min60">1시간</button>
+              <button class="pill" type="button" data-value="0" data-i18n="cook.minAny">여유 있게</button>
+            </div>
+          </div>
+          <div class="option-block">
+            <p class="option-label" data-i18n="cook.taste">맛</p>
+            <div class="pills" data-taste>
+              <button class="pill" type="button" data-value="mild" data-i18n="cook.tasteMild">담백</button>
+              <button class="pill" type="button" data-value="spicy" data-i18n="cook.tasteSpicy">매콤</button>
+              <button class="pill" type="button" data-value="any" aria-pressed="true" data-i18n="cook.tasteAny">아무거나</button>
+            </div>
+          </div>
+          <div class="option-block">
+            <p class="option-label" data-i18n="cook.cuisine">분위기</p>
+            <div class="pills" data-cuisine>
+              <button class="pill" type="button" data-value="korean" data-i18n="cook.cuisineKorean">한식</button>
+              <button class="pill" type="button" data-value="western" data-i18n="cook.cuisineWestern">양식</button>
+              <button class="pill" type="button" data-value="japanese" data-i18n="cook.cuisineJapanese">일식</button>
+              <button class="pill" type="button" data-value="chinese" data-i18n="cook.cuisineChinese">중식</button>
+              <button class="pill" type="button" data-value="seasia" data-i18n="cook.cuisineSeasia">동남아</button>
+              <button class="pill" type="button" data-value="any" aria-pressed="true" data-i18n="cook.cuisineAny">아무거나</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card prompt-card">
+          <div class="card-head">
+            <div>
+              <h2 data-i18n="cook.promptTitle">AI 프롬프트</h2>
+              <p class="hint" data-i18n="cook.promptHint">복사해서 ChatGPT, Claude, Gemini에 붙여넣으세요.</p>
+            </div>
+            <button class="accent-btn" type="button" data-copy data-i18n="cook.copy" disabled>복사하기</button>
+          </div>
+          <p class="prompt-empty" data-prompt-empty data-i18n="cook.promptEmpty">재료를 넣거나 요리 이름을 쓰면 여기에 프롬프트가 생겨요.</p>
+          <pre class="prompt-body" data-prompt hidden></pre>
+        </article>
+
+        <article class="card">
+          <h2 data-i18n="video.title">영상으로 보기</h2>
+          <p class="hint" data-i18n="video.hint">지금 재료와 분위기로 검색 결과를 열어요. AI가 준 링크보다 확실해요.</p>
+          <div class="video-row" data-video-links></div>
+          <p class="hint video-keyword" data-video-keyword hidden></p>
+          <p class="hint" data-video-empty data-i18n="video.empty">재료를 넣거나 요리 이름을 쓰면 검색 버튼이 생겨요.</p>
+        </article>
+      </section>
+
+      <section data-panel="shop" role="tabpanel" hidden>
+        <article class="card">
+          <div class="card-head">
+            <div>
+              <h2 data-i18n="shop.title">사야 하는 재료</h2>
+              <p class="hint" data-i18n="shop.hint">집에 이미 있는 재료는 자동으로 빠져요. 산 건 체크하면 냉장고로 옮겨요.</p>
+            </div>
+            <button class="ghost-btn" type="button" data-shop-clear data-i18n="shop.clear">목록 비우기</button>
+          </div>
+          <div class="chip-box" data-shop-box>
+            <input
+              data-shop-input
+              type="text"
+              enterkeyhint="done"
+              autocomplete="off"
+              placeholder="예: 참기름"
+              aria-label="장보기 재료 추가"
+              data-i18n-placeholder="shop.placeholder"
+              data-i18n-aria="shop.aria"
+            />
+          </div>
+          <p class="shop-count" data-shop-count hidden></p>
+          <p class="hint" data-shop-empty data-i18n="shop.empty">아직 살 게 없어요. AI가 적어 준 없는 재료를 붙여넣으세요.</p>
+          <div class="form-actions">
+            <button class="accent-btn" type="button" data-shop-copy data-i18n="shop.copy" disabled>목록 복사</button>
+          </div>
+        </article>
+      </section>
+
+      <section data-panel="journal" role="tabpanel" hidden>
+        <div class="journal-layout">
+          <article class="card">
+            <div class="cal-nav">
+              <button class="icon-btn" type="button" data-prev-month aria-label="이전 달" data-i18n-aria="journal.prevMonth">‹</button>
+              <h2 data-month-label></h2>
+              <button class="icon-btn" type="button" data-next-month aria-label="다음 달" data-i18n-aria="journal.nextMonth">›</button>
+            </div>
+            <div data-calendar></div>
+            <div class="recent-block" data-recent hidden>
+              <p class="option-label" data-i18n="journal.recent">최근 해먹은 요리</p>
+              <div class="recent-list" data-recent-list></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h2 data-day-title></h2>
+            <p class="hint" data-day-empty data-i18n="journal.empty">아직 기록이 없어요. 해먹은 요리와 레시피를 남겨 보세요.</p>
+            <div data-day-list></div>
+            <form data-day-form>
+              <input
+                class="field"
+                name="title"
+                type="text"
+                required
+                placeholder="해먹은 요리 이름"
+                aria-label="요리 이름"
+                data-i18n-placeholder="journal.titlePlaceholder"
+                data-i18n-aria="journal.titleAria"
+              />
+              <textarea
+                class="field"
+                name="recipe"
+                placeholder="레시피를 붙여넣으세요"
+                aria-label="레시피"
+                data-i18n-placeholder="journal.recipePlaceholder"
+                data-i18n-aria="journal.recipeAria"
+              ></textarea>
+              <input
+                class="field"
+                name="note"
+                type="text"
+                placeholder="메모 (선택) 예: 다음엔 덜 짜게"
+                aria-label="메모"
+                data-i18n-placeholder="journal.notePlaceholder"
+                data-i18n-aria="journal.noteAria"
+              />
+              <div class="form-actions">
+                <button class="accent-btn" type="submit" data-save-dish data-i18n="journal.save">이 날 기록 저장</button>
+                <button class="ghost-btn" type="button" data-cancel-edit data-i18n="journal.cancel" hidden>수정 취소</button>
+              </div>
+            </form>
+          </article>
+        </div>
+      </section>
+
+      <p class="fine-print" data-i18n="footer.privacy">재료와 기록은 이 브라우저에만 저장돼요. 서버로 보내지 않아요.</p>
+    </div>
+    <script type="module" src="src/app/main.js"></script>
+  </body>
+</html>

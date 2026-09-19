@@ -1,0 +1,16 @@
+:root {
+  --paper: #f4eee6;
+  --paper-2: #ebe3d6;
+  --ink: #2b231c;
+  --muted: #74685b;
+  --line: #ddd2c3;
+  --card: #fffdf9;
+  --accent: #c45c3a;
+  --accent-hover: #a94c2f;
+  --accent-soft: #f4ddd4;
+  --sage: #4e6d51;
+  --sage-soft: #dce6db;
+  --shadow: 0 12px 32px rgba(43, 35, 28, 0.07);
+  --sans: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  --radius: 1.15rem;
+}
